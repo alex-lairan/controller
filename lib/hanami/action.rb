@@ -471,7 +471,12 @@ module Hanami
       finish(request, response, halted)
     end
 
-    def initialize(**)
+    def initialize(**deps)
+      @_deps = deps
+    end
+
+    def with(**new_deps)
+      self.class.new(@_deps.merge(new_deps))
     end
 
     protected
